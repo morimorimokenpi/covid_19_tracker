@@ -1,12 +1,15 @@
 import axios from "axios";
+import { data } from "./../api/types";
 
 const url = "https://covid19.mathdro.id/api";
 
-export const fetchData = async () => {
+export const fetchData = async (): Promise<data> => {
   try {
-    const response = axios.get(url);
-    return response;
+    const { data } = await axios.get<data>(url);
+
+    return data;
   } catch (error) {
     console.log("エラー");
+    return {};
   }
 };
